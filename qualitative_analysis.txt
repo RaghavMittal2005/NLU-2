@@ -1,0 +1,36 @@
+
+QUALITATIVE ANALYSIS
+======================
+
+1. REALISM OF GENERATED NAMES
+------------------------------
+All three models learn the character-level patterns of Indian names:
+  - Common prefixes: Arj-, Dev-, Raj-, Vik-, Lak-, Pra-
+  - Common suffixes: -an, -av, -esh, -ish, -kar, -kumar, -la, -ya
+  - Typical name lengths: 4–10 characters
+
+Vanilla RNN produces mostly plausible names but can get stuck in
+repetitive patterns (e.g., Rararar) due to vanishing gradients.
+
+BiLSTM generates smoother, more varied names because the gating
+mechanism (input/forget/output gates) retains longer-range dependencies.
+Bidirectionality helps it learn common prefix-suffix co-occurrence patterns.
+
+RNN+Attention often produces the most culturally authentic-sounding names.
+The attention mechanism allows the decoder to "look back" at its generated
+history, reducing incoherent character sequences.
+
+2. COMMON FAILURE MODES
+------------------------
+  - Very short names (1–2 chars): model predicts EOS too early.
+  - Very long names (>12 chars): model fails to predict EOS.
+  - Phonetically awkward combos: 'Axz', 'Rtk' (unlikely consonant clusters).
+  - Over-representation of common names from training data.
+
+3. COMPARISON ACROSS MODELS
+----------------------------
+  BiLSTM > RNN+Attention > Vanilla RNN on both Novelty and Diversity
+  in most runs due to:
+  - Better gradient flow (LSTM gates)
+  - Richer character context (bidirectional encoding)
+  - More stable training (less prone to exploding/vanishing gradients)
