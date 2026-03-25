@@ -1,0 +1,7 @@
+QUANTITATIVE EVALUATION
+============================================================
+Model               Total  Novel Unique   Novelty%   Diversity%
+------------------------------------------------------------
+VanillaRNN            200    173    197      86.5%        98.5%
+LSTM                  200    149    191      74.5%        95.5%
+RNN+CausalAttn        200    197    194      98.5%        97.0%
